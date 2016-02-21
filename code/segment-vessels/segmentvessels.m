@@ -21,7 +21,7 @@ Vmap2 = (Vmap>ptr);
 Vmap2 = imdilate(Vmap2,strel3d(dilatesz));
 [~,~,Vmap] = removesmallcc(Vmap2,minsize);
 
-cube.setCutout(Vmap);
+cube.setCutout(uint32(Vmap>0));
 save(outVMap,'cube','-v7.3')
 
 end

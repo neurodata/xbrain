@@ -5,6 +5,7 @@ load('ReconMap-V0-A1.mat')
 xstart = 1350; ystart = 1850; zstart = 395;
 xstop = 1750; ystop = 2150; zstop = 495;
 cropsz = 10;
+crop2 = 0;
 C0 = Centroids_ed0 + repmat([xstart,ystart,zstart]',1,size(Centroids_ed0,2));
 C02 = cropcentroids(C0,xstart+cropsz,xstop-cropsz,ystart+cropsz,ystop-cropsz,zstart+15+cropsz,zstop-cropsz); %TODO
 
@@ -27,7 +28,7 @@ for k = 1:length(f)
     for i = sweep
         idx = find(Centroids(:,4) > i);
         Ct = Centroids(idx,1:3)';
-        Ct = cropcentroids(Ct,xstart+cropsz,xstop-cropsz,ystart+cropsz,ystop-cropsz,zstart+crop2,zstop-cropsz);
+        Ct = cropcentroids(Ct,xstart+cropsz,xstop-cropsz,ystart+cropsz,ystop-cropsz,zstart+15+cropsz,zstop-cropsz);
         
         try
             [TPid,FPid,FNid] = centroiderror_missrates_pr(C02,Ct,thresh);
