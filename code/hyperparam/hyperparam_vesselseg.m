@@ -6,7 +6,7 @@ Vmap0(:,:,1:15)=[];
 bsz = 20; % size of padding in each dimension       
 
 inPMap = 'final-ilastik-probmap-vessel.mat';
-outVMap = 'outvessels';
+outVMap = 'out-vesselmap';
 
 ptrvec = 0.6:.02:0.96;
 dilatevec = 2:2:8;
@@ -34,7 +34,7 @@ end
 display(['Selected threshold: ' num2str(ptrvec(r1),2)])
 display(['Selected dilate size: ' num2str(dilatevec(r2),2)])
 
-segmentvessels(inPMap,ptrvec(r1),dilatevec(r2),minsize,outVMap)
+segmentvessels(inPMap,outVMap,ptrvec(r1),dilatevec(r2),minsize)
 load(outVMap); Vmap = cube.data;
 Vmap2 = Vmap(bsz+1:end-bsz,bsz+1:end-bsz,bsz+1:end-bsz); Vmap = Vmap2;
 
