@@ -29,6 +29,6 @@ set0tn = find(Map0==0);
 set1n = find(Map1==0);
 TN = length(intersect(set0tn,set1n))./(length(set0tn));
 
-Err = [1-TP,TN];
+Err = [1-TP,1-TN];
 
 end
