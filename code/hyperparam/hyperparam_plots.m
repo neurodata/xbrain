@@ -42,10 +42,7 @@ for k = 1:length(f)
           %  disp('skipping this iteration')
         end
     end
-    p = TP ./( TP + FP);
-    r = TP ./ (TP + FN);
-    f1 = 2*p.*r./(p+r);
-    
+    f1 = f1score(TP,FP,FN);
     test_f1 = max(f1);
     
     if test_f1 > f1_max
