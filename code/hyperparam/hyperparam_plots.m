@@ -42,19 +42,19 @@ for k = 1:length(f)
           %  disp('skipping this iteration')
         end
     end
-    f1 = f1score(TP,FP,FN);
-    test_f1 = max(f1);
-    
+     
+[f1, p, r] = f1score(TP,FP,FN);
+test_f1 = max(f1);
+ 
     if test_f1 > f1_max
         f1_max = test_f1; % new best
         f1idx = find(f1 == test_f1);
         opPt.thresh = sweep(f1idx);
         opPt.paramsetting = legendLabel{k};
         opPt.f1 = f1_max;
-       
         idx = find(Centroids(:,4) > opPt.thresh);
         Ct = Centroids(idx,1:3)';
-        Ct = cropcentroids(Ct,xstart+cropsz,xstop-cropsz,ystart+cropsz,ystop-cropsz,zstart+cropsz,zstop-cropsz);
+        Ct = cropcentroids(Ct,xstart+cropsz,xstop-cropsz,ystart+cropsz,ystop-cropsz,zstart+15+cropsz,zstop-cropsz);
  
         [opPt.TPid,opPt.FPid,opPt.FNid] = centroiderror_missrates_pr(C02,Ct,thresh);
         
@@ -83,7 +83,13 @@ xlabel('Recall')
 ylabel('Precision')
 figure(101), legend(legendLabel)
 title('F1 Score')
-xlabel('operating point index')
+xlabel('threshold')
+idx = get(gca,'XTick');
+idx(idx == 0) = 1;
+
+idxTick = sweep(idx);
+set(gca,'XTick',idx)
+set(gca,'XTickLabel',idxTick)
 ylabel('score')
 
 %% Vis

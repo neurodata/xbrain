@@ -1,4 +1,4 @@
-function f1 = f1score(TP,FP,FN,b)
+function [f1, p, r] = f1score(TP,FP,FN,b)
 
 if nargin<4
     b=1;
