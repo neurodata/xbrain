@@ -139,11 +139,10 @@ for ii = 1:length(rp)
         
         s.setVoxelList(cube.local2Global(voxel_list));
         
-        
         % Approximate absolute centroid
         
         %metadata - for convenience
-        s.addDynamicMetadata('centroid', Centroid(ii,:));
+        s.addDynamicMetadata('centroid', Centroids(ii,:));
         
         cells{ccc} = s;
         ccc = ccc + 1;
