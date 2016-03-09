@@ -25,6 +25,9 @@ for ktot = 1:kmax
     end
     
     % find position in image with max correlation
+    if val == 0 % corner case
+        break
+    end
     [~,which_atom] = max(val); 
     which_loc = id(which_atom); 
   
