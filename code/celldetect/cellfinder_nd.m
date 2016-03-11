@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%
-function OMP_ProbMap_deploy_merge_upload(probFile,presid,startballsz,dilatesz, kmax, paintFile, centroidFile, downloadServer, downloadToken, downloadChannel)
+function cellfinder_nd(probFile,presid,startballsz,dilatesz, kmax, paintFile, centroidFile, server, token, channel, doUpload)
 
 load(probFile) % assume stored in cube
 Prob = cube.data;
@@ -11,7 +11,7 @@ Lbox = round(length(Dict)^(1/3));
 
 Nmap = zeros(size(Prob));
 newid = 1;
-newtest = Prob;
+newtest = single(Prob); % extra precision isn't important here
 Centroids = [];
 Confidence = [];
 for ktot = 1:kmax
@@ -33,9 +33,6 @@ for ktot = 1:kmax
   
     X2 = compute3dvec(Dict(:,which_atom),which_loc,Lbox,size(newtest));
     xid = find(X2); 
-    Nmap(xid) = newid;
-    
-    newid = newid+1;
     newtest = newtest.*(imdilate(X2,strel3d(dilatesz))<=0);
     ptest = val./sum(Dict);
     
@@ -43,6 +40,10 @@ for ktot = 1:kmax
         break%return
     end
     
+    % fixing bug - don't set this value until after 
+    Nmap(xid) = newid;
+    newid = newid+1;
+
     [rr,cc,zz] = ind2sub(size(newtest),which_loc);
     
     if ~isempty(cube.xyzOffset)
@@ -57,12 +58,15 @@ for ktot = 1:kmax
          
 end
 
+cube.setCutout(Nmap)
 %% Need to integrate upload code so that things all happen in parallel
 % this isn't the only way to do this, but probably the simplest
 
+if doUpload
 
 % Load data
 labels = Nmap;
+rp = regionprops(labels,'PixelIdxList','Area');
 
 % get rid of edge objects
 edgeLabels = [unique(labels(:,:,1)); unique(labels(:,:,end)); unique(labels(:,1,:)); ...
@@ -72,7 +76,9 @@ edgeLabels = unique(edgeLabels);
 edgeLabels(edgeLabels == 0) = [];
 
 for i = 1:length(edgeLabels)
-    labels(bw.PixelIdxList{edgeLabels(i)}) = 0;
+    if rp(edgeLabels(i)).Area > 0 
+    labels(rp(edgeLabels(i)).PixelIdxList) = 0;
+    end
 end
 
 % get data from DB for mask - should only be possible to have duplicates inload('../../data/groundtruth/Anno-V0-A0.mat')
@@ -80,29 +86,47 @@ end
 
 oo = OCP();
 
-oo.setServerLocation(uploadServer);
-oo.setAnnoToken(uploadToken);
-oo.setAnnoChannel(uploadChannel);
+oo.setServerLocation(server);
+oo.setAnnoToken(token);
+oo.setAnnoChannel(channel);
+
+% compute bounds for boundary issue cropping
+im_size = oo.annoInfo.DATASET.IMAGE_SIZE(0)
+im_offset = oo.annoInfo.DATASET.OFFSET(cube.resolution)
+
+xstop = cube.xyzOffset(1)+size(cube,1)-1;%, im_size(1));
+ystop = cube.xyzOffset(2)+size(cube,2)-1;%, im_size(2));
+zstop = cube.xyzOffset(3)+size(cube,3)-1;%, im_size(3));
+
+%cube.setCutout(cube.data(1:(xstop-cube.xyzOffset(1)+1), ...
+%                           1:(xstop-cube.xyzOffset(2)+1), ...
+%                           1:(xstop-cube.xyzOffset(3)+1)));
 
 q = OCPQuery;
 q.setType(eOCPQueryType.annoDense);
 q.setResolution(cube.resolution);
-q.setCutoutArgs([cube.xyzOffset(1),cube.xyzOffset(1)+size(cube,1)], ...
-                [cube.xyzOffset(2),cube.xyzOffset(2)+size(cube,2)], ...
-                [cube.xyzOffset(3),cube.xyzOffset(3)+size(cube,3)], ...
+q.setCutoutArgs([cube.xyzOffset(1), xstop], ...
+                [cube.xyzOffset(2), ystop], ...
+                [cube.xyzOffset(3), zstop], ...
                 cube.resolution);
-
+q
 existingAnno = oo.query(q);
+
+existingAnno
 
 exist_label = unique(labels(existingAnno.data > 0));
 exist_label(exist_label == 0) = [];
 
 if ~isempty(exist_label)
     disp('removing labels that already exist in DB')
+    length(exist_label)
     
-    for i = 1:length(exist_label)
-        labels(bw.PixelIdxList{exist_label(i)}) = 0;
+for i = 1:length(exist_label)
+    if rp(exist_label(i)).Area > 0 
+    labels(rp(exist_label(i)).PixelIdxList) = 0;
     end
+end
+
 end
 
 % now write back up!
@@ -114,9 +138,6 @@ cube.setCutout(labels);
 % one we are about to upload.  In practice, this is stored in the
 % probability cube and therefore Nmap output
 
-% re-run regionprops
-rp = regionprops(labels,'PixelIdxList','Area');
-
 nObj = sum([rp.Area]>0);
 fprintf('Number Cell Bodies detected: %d\n',nObj);
 
@@ -124,6 +145,9 @@ fprintf('Number Cell Bodies detected: %d\n',nObj);
 fprintf('Creating Cell Objects...');
 cells = cell(nObj,1);
 ccc = 1;
+size(Centroids)
+size(rp)
+
 for ii = 1:length(rp)
     
     if rp(ii).Area > 0
@@ -133,7 +157,7 @@ for ii = 1:length(rp)
         s.setXyzOffset(cube.xyzOffset);
         s.setDataType(eRAMONChannelDataType.uint32); %just in case
         s.setChannelType(eRAMONChannelType.annotation);
-        s.setChannel(uploadChannel);
+        s.setChannel(channel);
         [r,c,z] = ind2sub(size(cube.data),rp(ii).PixelIdxList);
         voxel_list = cat(2,c,r,z);
         
@@ -165,13 +189,7 @@ if nObj ~= 0
 else
     fprintf('No Cells Detected\n');
 end
-
-
-
-
-
-
-
+end
 %%
 save(centroidFile,'Centroids')
 sprintf(paintFile)
