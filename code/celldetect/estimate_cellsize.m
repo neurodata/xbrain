@@ -99,6 +99,8 @@ end
 outPaint = paint(padsz+1:end-padsz, padsz+1:end-padsz, padsz+1:end-padsz, :);
 
 end
-%outPaint = []
 
+if ~exist('outPaint')
+    outPaint = [];
+end
 

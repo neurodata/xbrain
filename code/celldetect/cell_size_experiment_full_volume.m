@@ -18,7 +18,7 @@ zstart = 390;
 resolution = 0;
 
 
-pData = h5read('~/code/xbrain/mytestfile.hdf5','/data');
+pData = h5read('~/code/xbrain/cell_prob_rfr1_full.hdf5','/data');
 load('centroids_rfr1.mat') % download centroids for entire cube 
 pData = permute(pData,[3,2,1]);
 
