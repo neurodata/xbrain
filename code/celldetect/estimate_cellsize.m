@@ -81,7 +81,7 @@ cellsz = bsz(id);
 % split paint into three channels
 
 clear pData
-if 1
+if 0
 numchan=3;
 paint = uint16([size(pData)+2*padsz,numchan]);
 for i=1:Nc
