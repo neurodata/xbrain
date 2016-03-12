@@ -26,8 +26,11 @@ if (sum(Mask(:))>0)&&(maskdilatesz>0)
     Mask(find(borderz == -1)) = 1;
 end
 
+xyz = cube.xyzOffset;
+
 Prob = Prob.*(Mask<=0);
 cube.setCutout(Prob);
+%cube.setXyzOffset([xyz(1)+padX,xyz(2)+padY,xyz(3)+padZ]);
 save(outProb,'cube')
 
 cube.setCutout(Mask);

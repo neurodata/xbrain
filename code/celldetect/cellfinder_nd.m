@@ -77,7 +77,7 @@ edgeLabels(edgeLabels == 0) = [];
 
 for i = 1:length(edgeLabels)
     if rp(edgeLabels(i)).Area > 0 
-    labels(rp(edgeLabels(i)).PixelIdxList) = 0;
+        labels(rp(edgeLabels(i)).PixelIdxList) = 0;
     end
 end
 
@@ -94,9 +94,9 @@ oo.setAnnoChannel(channel);
 im_size = oo.annoInfo.DATASET.IMAGE_SIZE(0)
 im_offset = oo.annoInfo.DATASET.OFFSET(cube.resolution)
 
-xstop = cube.xyzOffset(1)+size(cube,1)-1;%, im_size(1));
-ystop = cube.xyzOffset(2)+size(cube,2)-1;%, im_size(2));
-zstop = cube.xyzOffset(3)+size(cube,3)-1;%, im_size(3));
+xstop = cube.xyzOffset(1)+size(cube,2)-1;
+ystop = cube.xyzOffset(2)+size(cube,1)-1;
+zstop = cube.xyzOffset(3)+size(cube,3)-1;
 
 %cube.setCutout(cube.data(1:(xstop-cube.xyzOffset(1)+1), ...
 %                           1:(xstop-cube.xyzOffset(2)+1), ...
@@ -123,7 +123,7 @@ if ~isempty(exist_label)
     
 for i = 1:length(exist_label)
     if rp(exist_label(i)).Area > 0 
-    labels(rp(exist_label(i)).PixelIdxList) = 0;
+        labels(rp(exist_label(i)).PixelIdxList) = 0;
     end
 end
 
@@ -137,7 +137,7 @@ cube.setCutout(labels);
 % ilastik volume, and so we want to get back the same sized volume as the
 % one we are about to upload.  In practice, this is stored in the
 % probability cube and therefore Nmap output
-
+rp = regionprops(labels, 'PixelIdxList','Area');
 nObj = sum([rp.Area]>0);
 fprintf('Number Cell Bodies detected: %d\n',nObj);
 
