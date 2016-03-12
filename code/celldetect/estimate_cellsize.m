@@ -56,6 +56,10 @@ if strcmp(method,'full')
 else
     padProb = padarray(pData,[padsz,padsz,padsz]);
     for i=1:Nc
+        if mod(i,100) == 0
+            fprintf('now processing %d of %d...\n', i, Nc)
+        end
+        
         tmpdata = padProb(Centroids(i,2) - (N-1)/2 + padsz: Centroids(i,2)+ (N-1)/2 + padsz, ...
                       Centroids(i,1) - (N-1)/2 + padsz: Centroids(i,1)+ (N-1)/2 + padsz,...
                       Centroids(i,3) - (N-1)/2 + padsz: Centroids(i,3)+ (N-1)/2 + padsz);
@@ -75,8 +79,11 @@ cellsz = bsz(id);
 
 
 % split paint into three channels
+
+clear pData
+if 1
 numchan=3;
-paint = zeros([size(pData)+2*padsz,numchan]);
+paint = uint16([size(pData)+2*padsz,numchan]);
 for i=1:Nc
     
     chanid = ceil(id(i)/(numchan+1));
@@ -91,6 +98,7 @@ end
 
 outPaint = paint(padsz+1:end-padsz, padsz+1:end-padsz, padsz+1:end-padsz, :);
 
-
 end
+%outPaint = []
+
 
