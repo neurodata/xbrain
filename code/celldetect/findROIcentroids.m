@@ -1,4 +1,4 @@
-function Cout = findROIcentroids(Centroids,xyzOffset,dsz,windowsz)
+function [Cout,ID] = findROIcentroids(Centroids,xyzOffset,dsz,windowsz)
 
 if nargin<4
     windowsz=0;
