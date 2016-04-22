@@ -1,4 +1,4 @@
-README for /neurodata/xbrain/data
+# README for /neurodata/xbrain/data #
 
 This repo contains manually annotated (training and test) volumes of X-ray microtomography data. Currently, we have these volumes saved in matfiles, however we plan to include other formats in a future release. Further details about the data collection and methods use to annotate these volumes can be found at https://arxiv.org/abs/1604.03629
 
@@ -14,9 +14,9 @@ Dyer, Eva L., et al. "Quantifying mesoscale neuroanatomy using X-ray microtomogr
 }
 
 ***
-Information about Volume 1 (V1):
+# Information about Volume 1 (V1) #
 
-(0) Size of volume: 300 x 300 x 100 voxels at 0.65 um isotropic
+(0) ## Size of volume ## : 300 x 300 x 100 voxels at 0.65 um isotropic
 
 (1) Image Data (imgdata_gt.mat): micro-CT data collected from 2-BM at Argonne National Laboratory
 		- IM is a 300x300x100 array containing the image data in 8 bit format
