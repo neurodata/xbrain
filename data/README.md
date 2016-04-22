@@ -2,6 +2,8 @@
 
 This repo contains manually annotated (training and test) volumes of X-ray microtomography data. Currently, we have these volumes saved in matfiles, however we plan to include other formats in a future release. Further details about the data collection and methods use to annotate these volumes can be found at https://arxiv.org/abs/1604.03629
 
+If you have any questions, please contact Eva Dyer at edyer{at}northwestern{dot}edu. 
+
 ***
 If you use any of the datasets contained in this repository, please cite the following preprint:
 
