@@ -1,2 +1,5 @@
+*.blend
 *.mat
+*.obj
+*.png
 *~
