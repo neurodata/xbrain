@@ -10,6 +10,9 @@ Please direct any questions to Eva Dyer at edyer{at}northwestern{dot}edu.
 
 ### Getting started... ###
 
+#### Install NeuroData Matlab API (Cajal) ####
+In order to run the following example, you must install NeuroData's Matlab API (CAJAL). You can do this by downloading or cloning the [CAJAL](http://www.github.com/neurodata/CAJAL) github repo. If you have your own dataset to test, you can skip this step but note that much of the code assumes that you have CAJAL installed and in your path.
+
 #### Run xbrain on training volume (V1) ####
 (Step 1) To begin, make sure you add all necessary directories to your current path in Matlab. To run our cell detection algorithm on raw image data (located in NeuroData), you need the following directories.
 ~~~matlab
@@ -25,7 +28,8 @@ startballsz = 18; dilatesz = 8; kmax = 500; presid = 0.7;
 Results = runxbrain_gmm(xrange,yrange,zrange,presid,startballsz,dilatesz,kmax);
 ~~~
 The parameters that we supply in the example above have been optimized over this training volume (V1) using methods in hyperparam module (/xbrain/code/hyperparam).
- 
+***
+
 ### What's here... ###
 * __analysis__: matlab scripts for retrieving results from OCP.
 * __celldetect__: matlab code for cell detection.
@@ -33,7 +37,7 @@ The parameters that we supply in the example above have been optimized over this
 * __hyperparam__: matlab code for running hyper-parameter sweeps to optimize celldetect and vessel-segment modules.
 * __masking__: matlab code for semi-supervised masking of data volumes.
 * __metrics__: matlab code for computing centroid-based and pixel-wise precision and recall.
-* __segment-gmm__: matlab code for segmenting foreground (cells and vessels) from the background (old version of segmentation codes). 
+* __segment-gmm__: matlab code for segmenting foreground (cells and vessels) from the background using a gaussian mixture model.
 * __segment-vessels__: matlab code for computing vessel segmentation (from ilastik output).
 * __scripts__: matlab scripts for running different segmentation and analysis modules.
 * __spatialstats__: code to compute density and other spatial statistics.
