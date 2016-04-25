@@ -14,4 +14,3 @@ Please direct any questions to Eva Dyer at edyer{at}northwestern{dot}edu.
 * __Data__: Training and test volumes used to optimize and evaluate our methods.
 * __Library__: Ilastik classifier files + LONI Pipeline files used to execute our distributed workflow on full data volumes (~100 GB of raw data).
 * __Results__: Some results from running xbrain on large datasets.
-***
