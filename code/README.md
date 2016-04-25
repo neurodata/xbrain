@@ -21,4 +21,3 @@ Please direct any questions to Eva Dyer at edyer{at}northwestern{dot}edu.
 * __spatialstats__: code to compute density and other spatial statistics.
 * __utils__: extra helper functions needed in multiple modules.
 * __visualize__: matlab and python code to visualize data + pull down a obj representation of annotations (for 3D visualization with Blender).
-***
