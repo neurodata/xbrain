@@ -11,7 +11,7 @@ data = im2double(cube.data);
 
 %% Step 1. compute mask
 dilatesz = 10; % varthr = 1e-5;
-Mask = computemask(data,dilatesz);
+Mask = computemask_gmm(data,dilatesz);
 whichmasked = find(Mask==1);
 
 % more than 40% of image slice must be unmasked to solve for gmm
