@@ -37,6 +37,22 @@ __Cell centroids (ReconMap-V1-A1.mat)__:
 * Centroids_ed0 is a 3x321 matrix containing the centroid of each labeled cell body
 * ReconMap_ed0 is a 300x300x100 array containing non-zero labels for all detected cells (each cell has a unique label, starting with label = 1)
 
+## Example - Data to test cell counting algorithms (raw data + ground truth centroids)
+__(1) Load the raw image data and location of all cells in the ground truth volume V1__
+```matlab
+load('/data/groundtruth/V1/traindata-celldetect-V1')
+```
+This mat file contains the following: 
+* IM contains the raw data from the image volume V1 (300x300x100 pixels)
+* Centroids_gt is a 3x321 matrix containing the (x,y,z) centroid of all __manually labeled__ cell bodies in V1 (in global coordinates). This list of centroids was manually curated to ensure accuracy. 
+* Centroids_xb is a 3x302 matrix containing the (x,y,z) centroid of all __detected__ cell bodies in V1 (in global coordinates) using xbrain's cell detection method.
 
+__(2) Load the test set (raw data + ground truth centroids) (V3)__
+```matlab
+load('/data/groundtruth/V3/traindata-celldetect-V3.mat')
+```
+This mat file contains the following:
+* IM3 contains the raw data from the image volume V2 (200x200x200 pixels). 
+* Centroids_gt3 is a 3x291 matrix containing the (x,y,z) centroid of all __manually labeled__ cell bodies in V1 (in global coordinates). This set of labels has not been manually curated to ensure accuracy. We simply load the annotated nii files for this volume (located in /data/groundtruth/V3) and simply find connected components in the annotated volume.
 
 
