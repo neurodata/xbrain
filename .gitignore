@@ -1,5 +1,4 @@
 *.blend
-*.mat
 *.obj
 *.png
 *.pdf
@@ -9,4 +8,6 @@
 *.fig
 *.key
 *.ppt
+*.tif
+*.tiff
 *~
