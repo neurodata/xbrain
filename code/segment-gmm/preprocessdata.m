@@ -1,14 +1,18 @@
-function [IM,Mask] = preprocessdata(data,Mask)
+function [IM,Mask] = preprocessdata(data,Mask,numfreq)
 
 % Preprocess Data to remove radial artifacts
 % for 400x400 cube, numfreq ~= 5
 % set all masked pixels to equal -200
-wthr = 0.0267;
-%wthr = 0.015;
 
 bgval = -200;
 n1 = size(data,1);
-numfreq = ceil(wthr*n1);
+
+if nargin<3
+    wthr = 0.0267;
+    numfreq = ceil(wthr*n1);
+end
+
+% for new dataset, numfreq = 5;
 
 % remove low frequency dct components (in 2D)
 N = size(data,3);
