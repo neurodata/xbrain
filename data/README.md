@@ -37,6 +37,8 @@ __Cell centroids (ReconMap-V1-A1.mat)__:
 * Centroids_ed0 is a 3x321 matrix containing the centroid of each labeled cell body
 * ReconMap_ed0 is a 300x300x100 array containing non-zero labels for all detected cells (each cell has a unique label, starting with label = 1)
 
+***
+
 ## Example - Training and test data to evaluate cell counting algorithms
 __(1) Load the raw image data and location of all cells in the ground truth volume V1__
 ```matlab
