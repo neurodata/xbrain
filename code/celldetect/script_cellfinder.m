@@ -1,6 +1,6 @@
 % script to run cell finder (on test data)
 
-load('data/test_cube_probs_rfr.mat')
+load('data/testdata_2BM/ilastik_probs_V1/test_cube_probs_rfr.mat')
 Prob = cube.data;
 
 ptr = 0.2; % threshold Prob > ptr

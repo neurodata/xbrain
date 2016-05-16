@@ -56,7 +56,7 @@ for ktot = 1:kmax
 
     X3 = compute3dvec(Ddilate,which_loc,Lbox,size(newtest));
     
-    newid = newid+1;
+    newid = newid+1; % bug - increment newid twice!
     newtest = newtest.*(X3==0);
     ptest = val./sum(Dict);
     
