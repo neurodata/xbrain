@@ -11,12 +11,31 @@ Please direct any questions to Eva Dyer at edyer{at}northwestern{dot}edu.
 ### Celldetect Module ###
 The main aim of this module is to infer the position (and eventually size) of all cells in a 3D volume of image data. We assume that we already have computed a "probability map" which encodes the probability that each voxel corresponds to a cell body. 
 
-To begin, first you must include the following folders in your path in Matlab:  
+Before starting, you must first include the following folders in your path in Matlab:  
 * /xbrain/code/utils
 * /xbrain/code/celldetect
 
-Second, run the script ___script_cellfinder.m___. This will run the main cell finding routine ___OMP_ProbMap.m___ on the test data in the celldetect folder. The output is a 10x4 matrix (Centroids) with the first 10 detected cells centroids (columns 1-3) and the correlation value obtain for all centroids (column 4).
+### Example - find the top ten cells with highest correlation 
+To begin, run the script ___script_cellfinder.m___. This script will run the main cell finding routine ___OMP_ProbMap.m___ on the test data in the celldetect folder. The output includes two variables: (1) _Centroids_, a 10x4 matrix with the position (x,y,z) first 10 detected cells centroids (columns 1-3) and the correlation value between all detected cells and theinput probability map (column 4).
 
+To find more cells in the volume, set kmax to a larger number. The variable _kmax_ controls the maximum number of iterations of the algorithms (and constrains the maximum number of detected cells). 
+
+To find the top 100 cells, call the greedy sphere finder method again (this will take a few minutes).
+```matlab
+kmax = 100; 
+[Centroids,Nmap] = OMP_ProbMap(Prob,ptr,presid,startsz,dilatesz,kmax);
+```
+
+### Visualize 
+__(1) Visualize the detected cells overlaid on probabilities__
+  ```matlab
+figure; 
+for i=1:size(Prob,3) 
+    imagesc(Prob(:,:,i)-(Nmap(:,:,i)~=0)), 
+    pause, 
+end
+  ```
+  
 ##### What's included in the celldetect module #####
 * __OMP_ProbMap.m__: This is the main function used for cell detection, as it implements our greedy sphere finding approach described in [Dyer et al. 2016](https://arxiv.org/abs/1604.03629). This algorithm takes a 3D probability map (the same size as the image data) as its input and returns the centroids and confidence value (between 0-1) of all detected cell bodies.
 * __cellfinder_nd.m__: This is the function we use to implement our greedy sphere finder algorithm for datasets in NeuroData and push the resulting annotations back to the NeuroData server.
