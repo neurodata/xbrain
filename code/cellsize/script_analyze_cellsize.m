@@ -10,7 +10,6 @@
 % zmin = 414;
 % zmax = 1950;
 
-
 load cellsize_rfr1
 load centroids_rfr1
 %load finalresults-cell2vesseldist
