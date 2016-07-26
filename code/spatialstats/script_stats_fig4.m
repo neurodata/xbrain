@@ -1,4 +1,6 @@
-%
+
+load('centroids_rfr1.mat') % in /xbrain/results
+load('traindata-celldetect-V1.mat') % /xbrain/data/groundtruth/V1
 
 id1 = find((Centroids(:,4)<0.9).*(Centroids(:,4)>=0.7));
 id2 = find((Centroids(:,4)<0.7).*(Centroids(:,4)>=0.5));
@@ -31,9 +33,9 @@ x0 = [x0; [xx1(:), yy1(:), zz1(:)]];
 x0 = [x0; [xx1(:), yy1(:), zz1(:)]];
 
 clear C1
-C1(:,1) = Centroids_ed0(1,:)+xmin; 
-C1(:,2) = Centroids_ed0(2,:)+ymin; 
-C1(:,3) = Centroids_ed0(3,:)+zmin;
+C1(:,1) = Centroids_gt(1,:)+xmin; 
+C1(:,2) = Centroids_gt(2,:)+ymin; 
+C1(:,3) = Centroids_gt(3,:)+zmin;
 
 %%
 

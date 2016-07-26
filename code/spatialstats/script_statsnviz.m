@@ -3,7 +3,7 @@ numclust = 3; % number of clusters to split cell types into
 minsz = 500; % minimum number of voxels for conn comps (set rest to zero)
 
 %% Load nii file (with segmentation)
-Gt = load_nii('proj4_x1351-1650_y1851-2150_z395-495_r0_cube1_eva5.nii');
+Gt = load_nii('proj4_x1351-1650_y1851-2150_z395-495_r0_cube1_anno_eva8.nii');
 
 % neuron and vessel segmentation
 Nmap = (Gt.img==1);
@@ -16,11 +16,23 @@ Vmap = (Gt.img==2);
 % (3) distance from centroid of cell to closest vessel
 % (4) 
 
-Results = computedensitystats(Nmap,Vmap,minsz,erodesz,maxdist);
+maxdist=10;
+Results = computedensitystats(Nmap,Vmap,maxdist);
 
 corr = visualizecorrelations(Results);
 
+
 %%
+
+
+
+
+
+
+
+
+%% this part isnt working.
+
 % cluster cells based upon their size
 labels = kmeans(numvox_nb,numclust);
 [val,id] = sort(labels);
