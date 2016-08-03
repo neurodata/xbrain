@@ -11,7 +11,9 @@ __Dyer, Eva L., et al. "Quantifying mesoscale neuroanatomy using X-ray microtomo
 
 ***
 ## What's available ##
-* __xbrain/data/groundtruth__: contains Matlab arrays (MAT) with X-ray image data and/or manual annotations. To start, go to the groundtruth folder (/xbrain/data/groundtruth) and check out V1.
+* __xbrain/data/groundtruth__
+  - This folder contains Matlab arrays (MAT) with X-ray image data and/or manual annotations, as well as .nii files (ITK Snap) which contain the raw annotations of different volumes.
+  - To start, go to the groundtruth folder (/xbrain/data/groundtruth) and check out V1.
   - V0, V1, V2, V3 are all different (non-overlapping) subvolumes we labeled within an unsectioned cubic mm volume of mouse cortex. 
   - V1 is the largest annotated volume (300 x 300 x 100) and currently the only volume that we have full (dense) reconstructions of cells and vessels. V0 is a smaller cube in the middle of V1 for which we have two annotations from different annotators (A1 and A2).
   - V2 can be used as a small test set for cell detection algorithms (full cell bodies, some vessels).
@@ -23,11 +25,11 @@ __Dyer, Eva L., et al. "Quantifying mesoscale neuroanatomy using X-ray microtomo
   - Test arrays for validating matlab routines. This folder contains mat files, ilp files (ilastik classifier format after training), and outputs of our algorithms on test datasets.
  
 ### Python Example - Download image data, annotations, and/or cell/vessel probability maps
-__(1) Install neurodata's API, [ndio](http://www.github.com/ndio), using pip (for package management).
+__(1) Install neurodata's API, [ndio](http://www.github.com/ndio).__
 ```
 pip install ndio
 ```
-__(2) Run the ipython notebook ('xbrain_getdata.iynb') in this folder, to download any of the following XBRAIN-generated data products:
+__(2) Run the ipython notebook ('xbrain/data/getdata/xbrain_getdata.iynb')__ to download any of the following XBRAIN-generated data products:
 * final results of our vessel segmentation and cell detection methods running at scale (cellseg, vesselseg)
 * probability maps produced from our trained ilastik classifier (cellprob, vesselprob)
 
