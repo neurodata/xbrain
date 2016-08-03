@@ -36,6 +36,7 @@ __(2) Run the ipython notebook [/xbrain/data/getdata/xbrain_getdata.ipynb](http:
 * final results of our vessel segmentation and cell detection methods running at scale (cellseg, vesselseg)
 * probability maps produced from our trained ilastik classifier (cellprob, vesselprob)
 
+
 ### Matlab Example - Training and test data to evaluate cell detection algorithms
 __(1) Load the raw image data and location of all cells in the ground truth volume V1__
 ```matlab
