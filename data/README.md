@@ -28,7 +28,7 @@ If you have any questions, please contact Eva Dyer at edyer{at}northwestern{dot}
 ## Examples
 
 ### Python Example - Download image data, annotations, and/or cell/vessel probability maps
-__(1) Install neurodata's API, [ndio](http://www.github.com/ndio).__
+__(1) Install neurodata's API, [ndio](http://www.github.com/neurodata/ndio).__
 ```
 pip install ndio
 ```
