@@ -20,7 +20,7 @@ If you have any questions, please contact Eva Dyer at edyer{at}northwestern{dot}
   - V3 was the final held out test set that we used to evaluate xbrain (only cell centroids, not full cell bodies).
   - To download the annotations from all training volumes, go to CombinedMats folder and download 'AllGroundTruthVolumes.mat'
 * __xbrain/data/getdata__
-  - Python notebooks for data downloads using NeuroData's Python API, [ndio](http://www.github.com/neurodata/ndio).
+  - Python notebooks for data downloads using ndio (github.com/neurodata/ndio).
 * __xbrain/data/validation__
   - Test arrays for validating matlab routines. This folder contains mat files, ilp files (ilastik classifier format after training), and outputs of our algorithms on test datasets.
  
