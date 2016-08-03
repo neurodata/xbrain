@@ -2,15 +2,15 @@
 
 This repo contains manually annotated (training and test) volumes of X-ray microtomography data. Currently, we have these volumes saved in matfiles, however we plan to include other formats in a future release. Further details about the data collection and methods use to annotate these volumes can be found in our [manuscript](http://arxiv.org/pdf/1604.03629).
 
-If you have any questions, please contact Eva Dyer at edyer{at}northwestern{dot}edu. 
-
-***
-If you use any of the datasets contained in this repository, please cite the following manuscript:
+If you use any of the data products contained in this repository, please cite the following manuscript:
 
 __Dyer, Eva L., et al. "Quantifying mesoscale neuroanatomy using X-ray microtomography." [arXiv:1604.03629](http://arxiv.org/pdf/1604.03629) (2016).__
 
+If you have any questions, please contact Eva Dyer at edyer{at}northwestern{dot}edu. 
+
 ***
 ## What's available ##
+
 * __xbrain/data/groundtruth__
   - This folder contains Matlab arrays (MAT) with X-ray image data and/or manual annotations, as well as .nii files (ITK Snap) which contain the raw annotations of different volumes.
   - To start, go to the groundtruth folder (/xbrain/data/groundtruth) and check out V1.
@@ -20,10 +20,13 @@ __Dyer, Eva L., et al. "Quantifying mesoscale neuroanatomy using X-ray microtomo
   - V3 was the final held out test set that we used to evaluate xbrain (only cell centroids, not full cell bodies).
   - To download the annotations from all training volumes, go to CombinedMats folder and download 'AllGroundTruthVolumes.mat'
 * __xbrain/data/getdata__
-  - Python notebooks for data downloads using [ndio](http://www.github.com/neurodata/ndio), NeuroData's Python API.
+  - Python notebooks for data downloads using NeuroData's Python API, [ndio](http://www.github.com/neurodata/ndio).
 * __xbrain/data/validation__
   - Test arrays for validating matlab routines. This folder contains mat files, ilp files (ilastik classifier format after training), and outputs of our algorithms on test datasets.
  
+***
+## Examples
+
 ### Python Example - Download image data, annotations, and/or cell/vessel probability maps
 __(1) Install neurodata's API, [ndio](http://www.github.com/ndio).__
 ```
@@ -33,7 +36,7 @@ __(2) Run the ipython notebook ('xbrain/data/getdata/xbrain_getdata.iynb')__ to 
 * final results of our vessel segmentation and cell detection methods running at scale (cellseg, vesselseg)
 * probability maps produced from our trained ilastik classifier (cellprob, vesselprob)
 
-## Matlab Example - Training and test data to evaluate cell counting algorithms
+### Matlab Example - Training and test data to evaluate cell detection algorithms
 __(1) Load the raw image data and location of all cells in the ground truth volume V1__
 ```matlab
 load('/data/groundtruth/V1/traindata-celldetect-V1')
@@ -42,7 +45,6 @@ This mat file contains the following:
 * IM contains the raw data from the image volume V1 (300x300x100 pixels)
 * Centroids_gt is a 3x321 matrix containing the (x,y,z) centroid of all __manually labeled__ cell bodies in V1 (in global coordinates). This list of centroids was manually curated to ensure accuracy. 
 * Centroids_xb is a 3x302 matrix containing the (x,y,z) centroid of all __detected__ cell bodies in V1 (in global coordinates) using xbrain's cell detection method.
-
 __(2) Load the test set (raw data + ground truth centroids) (V3)__
 ```matlab
 load('/data/groundtruth/V3/traindata-celldetect-V3.mat')
