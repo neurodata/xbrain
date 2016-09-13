@@ -36,7 +36,6 @@ __(2) Run the ipython notebook [/xbrain/data/getdata/xbrain_getdata.ipynb](http:
 * final results of our vessel segmentation and cell detection methods running at scale (cellseg, vesselseg)
 * probability maps produced from our trained ilastik classifier (cellprob, vesselprob)
 
-
 ### Matlab Example - Training and test data to evaluate cell detection algorithms
 __(1) Load the raw image data and location of all cells in the ground truth volume V1__
 ```matlab
@@ -54,4 +53,12 @@ This mat file contains the following:
 * IM3 contains the raw data from the image volume V2 (200x200x200 pixels). 
 * Centroids_gt3 is a 3x291 matrix containing the (x,y,z) centroid of all __manually labeled__ cell bodies in V1 (in global coordinates). This set of labels has not been manually curated to ensure accuracy. We simply load the annotated nii files for this volume (located in /data/groundtruth/V3) and simply find connected components in the annotated volume.
 
+### Matlab Example - Download image data using CAJAL (Matlab API)
+__(1) [Install CAJAL](http://github.com/neurodata/CAJAL) (NeuroData's Matlab API)__
 
+__(2) Download and save this [m file](https://github.com/neurodata/xbrain/blob/master/data/getdata/MatlabAPI/ocpGetData.m)__
+
+__(3) To download all of the (4x) downsampled image data into Matlab:__
+```matlab
+Img = ocpGetData();
+```
