@@ -32,7 +32,7 @@ __(1) Install neurodata's API, [ndio](http://www.github.com/neurodata/ndio).__
 ```
 pip install ndio
 ```
-__(2) Run the ipython notebook [/xbrain/data/getdata/xbrain_getdata.ipynb](http://github.com/neurodata/xbrain/blob/master/code/xbrain-python/xbrain_getdata.ipynb)__ to download the:
+__(2) Download and run this [ipython notebook](http://github.com/neurodata/xbrain/blob/master/code/xbrain-python/xbrain_getdata.ipynb)__ to fetch the:
 * final results of our vessel segmentation and cell detection methods running at scale (cellseg, vesselseg)
 * probability maps produced from our trained ilastik classifier (cellprob, vesselprob)
 
