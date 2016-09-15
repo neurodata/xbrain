@@ -42,6 +42,7 @@ __(1) Download and run this [ipython notebook](http://github.com/neurodata/xbrai
 __(0) Download the ground truth data__
 * Download the ground truth data [here](https://dl.dropboxusercontent.com/u/1260288/Data/Xbrain-GroundTruth-Data/groundtruth.zip).
 * Upack the zip file and add it to your Matlab path 
+
 __(1) Load the raw image data and location of all cells in the ground truth volume V1__
 ```matlab
 load('/data/groundtruth/V1/traindata-celldetect-V1')
@@ -50,7 +51,7 @@ This mat file contains the following:
 * IM contains the raw data from the image volume V1 (300x300x100 pixels)
 * Centroids_gt is a 3x321 matrix containing the (x,y,z) centroid of all __manually labeled__ cell bodies in V1 (in global coordinates). This list of centroids was manually curated to ensure accuracy. 
 * Centroids_xb is a 3x302 matrix containing the (x,y,z) centroid of all __detected__ cell bodies in V1 (in global coordinates) using xbrain's cell detection method.
- 
+
 __(2) Load the test set (raw data + ground truth centroids) (V3)__
 ```matlab
 load('/data/groundtruth/V3/traindata-celldetect-V3.mat')
