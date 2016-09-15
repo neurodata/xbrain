@@ -12,6 +12,7 @@ If you have any questions, please contact Eva Dyer at edyer{at}northwestern{dot}
 ## What's available ##
 
 * __xbrain/data/groundtruth__
+  - To access any of our ground truth datasets, you need to first download this [file](https://dl.dropboxusercontent.com/u/1260288/Data/Xbrain-GroundTruth-Data/validation.zip). Due to its size, it is not contained in this repo.
   - This folder contains Matlab arrays (MAT) with X-ray image data and/or manual annotations, as well as .nii files (ITK Snap) which contain the raw annotations of different volumes.
   - To start, go to the groundtruth folder (/xbrain/data/groundtruth) and check out V1.
   - V0, V1, V2, V3 are all different (non-overlapping) subvolumes we labeled within an unsectioned cubic mm volume of mouse cortex. 
@@ -22,6 +23,7 @@ If you have any questions, please contact Eva Dyer at edyer{at}northwestern{dot}
 * __xbrain/data/getdata__
   - Python notebooks for data downloads using ndio (github.com/neurodata/ndio).
 * __xbrain/data/validation__
+  - To access any of our validation datasets, you need to first download this [file](https://dl.dropboxusercontent.com/u/1260288/Data/Xbrain-GroundTruth-Data/validation.zip). Due to its size, it is not contained in this repo.
   - Test arrays for validating matlab routines. This folder contains mat files, ilp files (ilastik classifier format after training), and outputs of our algorithms on test datasets.
  
 ***
@@ -45,6 +47,7 @@ This mat file contains the following:
 * IM contains the raw data from the image volume V1 (300x300x100 pixels)
 * Centroids_gt is a 3x321 matrix containing the (x,y,z) centroid of all __manually labeled__ cell bodies in V1 (in global coordinates). This list of centroids was manually curated to ensure accuracy. 
 * Centroids_xb is a 3x302 matrix containing the (x,y,z) centroid of all __detected__ cell bodies in V1 (in global coordinates) using xbrain's cell detection method.
+ 
 __(2) Load the test set (raw data + ground truth centroids) (V3)__
 ```matlab
 load('/data/groundtruth/V3/traindata-celldetect-V3.mat')
@@ -54,11 +57,6 @@ This mat file contains the following:
 * Centroids_gt3 is a 3x291 matrix containing the (x,y,z) centroid of all __manually labeled__ cell bodies in V1 (in global coordinates). This set of labels has not been manually curated to ensure accuracy. We simply load the annotated nii files for this volume (located in /data/groundtruth/V3) and simply find connected components in the annotated volume.
 
 ### Matlab Example - Download image data using CAJAL (Matlab API)
-__(1) [Install CAJAL](http://github.com/neurodata/CAJAL) (NeuroData's Matlab API)__
-
-__(2) Download and save this [m file](https://github.com/neurodata/xbrain/blob/master/data/getdata/MatlabAPI/ocpGetData.m)__
-
-__(3) To download all of the (4x) downsampled image data into Matlab:__
-```matlab
-Img = ocpGetData();
-```
+  - [Install CAJAL](http://github.com/neurodata/CAJAL) (NeuroData's Matlab API)__
+  - Download and save this [m file](https://github.com/neurodata/xbrain/blob/master/data/getdata/MatlabAPI/ocpGetData.m)__
+  - To download all of the (4x) downsampled image data into Matlab, use this command: `Img = ocpGetData();`
