@@ -1,6 +1,6 @@
 # Downloading Image Data and Annotated Volumes #
 
-This repo contains manually annotated (training and test) volumes of X-ray microtomography data. Currently, we have these volumes saved in matfiles, however we plan to include other formats in a future release. Further details about the data collection and methods use to annotate these volumes can be found at https://arxiv.org/abs/1604.03629
+Please download all the ground truth datasets [here](https://dl.dropboxusercontent.com/u/1260288/Data/Xbrain-GroundTruth-Data/groundtruth.zip). This file contains numerous manually annotated (training and test) volumes of X-ray microtomography data. Currently, we have these volumes saved in matfiles, however we plan to include other formats in a future release. Further details about the data collection and methods use to annotate these volumes can be found [here](https://arxiv.org/abs/1604.03629)
 
 If you have any questions, please contact Eva Dyer at edyer{at}northwestern{dot}edu. 
 
@@ -11,7 +11,7 @@ __Dyer, Eva L., et al. "Quantifying mesoscale neuroanatomy using X-ray microtomo
 
 ***
 ## What's available ##
-* Each folder in this repo contains some amount of X-ray image data and manual annotations. To start, check out V1. More details about this volume are provided below. 
+* Each folder contains some amount of X-ray image data and manual annotations. To start, check out V1. More details about this volume are provided below. 
 * V0, V1, V2, V3 are all different (non-overlapping) subvolumes we labeled within an unsectioned cubic mm volume of mouse cortex. 
 - V1 is the largest annotated volume (300 x 300 x 100) and currently the only volume that we have full (dense) reconstructions of cells and vessels. 
 - V0 is a smaller cube in the middle of V1 for which we have two annotations from different annotators (A1 and A2).
